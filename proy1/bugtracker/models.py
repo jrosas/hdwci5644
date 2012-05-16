@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -32,20 +33,20 @@ class Error(models.Model):
 	fecha_reporte=models.DateField()
 	original=models.BooleanField()
 	informacion_duplicacion=models.TextField(max_length=4000)
-        usuario_reporto=models.ForeignKey(User,on_delete=models.SET(get_sentinel_user))
-	usuario_encargado=models.ForeignKey(User, on_delete=models.SET(get_sentinel_user))
+        usuario_reporto=models.ForeignKey(User,related_name='+',on_delete=models.SET(get_sentinel_user))
+	usuario_encargado=models.ForeignKey(User,related_name='+', on_delete=models.SET(get_sentinel_user))
 	fecha_modificacion=models.DateField(auto_now=True)
 
 class ComenRep(models.Model):
 	modo= models.CharField(max_length=1, choices=MODO_CHOICES)
-        usuario=models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
+        usuario=models.ForeignKey(User,related_name='+',on_delete=models.SET(get_sentinel_user))
 	id_error=models.ForeignKey(Error,null=False)
 	contenido=models.TextField(max_length=4000)
 	fecha_com=models.DateField(auto_now_add=True)
 
 class Mensaje(models.Model):
 	id_m= models.AutoField(primary_key=True)
-        emisor=models.ForeignKey(User,on_delete=models.SET(get_sentinel_user))
-        receptor=models.ForeignKey(User,on_delete=models.SET(get_sentinel_user))
+        emisor=models.ForeignKey(User,related_name='+',on_delete=models.SET(get_sentinel_user))
+        receptor=models.ForeignKey(User,related_name='+',on_delete=models.SET(get_sentinel_user))
 	asunto=models.CharField(max_length=30)
 	contenido=models.TextField(max_length=4000)
