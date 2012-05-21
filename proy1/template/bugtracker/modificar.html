@@ -1,0 +1,15 @@
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/bugtracker/error/modificar/guardar/{{ seleccionado.id }}/" method="post">
+{% csrf_token %}
+
+    <ul>
+	<input type="radio" name="estado" id="1" value="S" /> Sin Confirmar <br/>
+	<input type="radio" name="estado" id="2" value="A" /> Asignado <br/> 
+	<input type="radio" name="estado" id="3" value="R" /> Resuelto <br/>
+	<input type="radio" name="estado" id="4" value="D" /> Duplicado <br/>
+	<input type="radio" name="estado" id="5" value="C" /> Cerrado  <br/>
+    </ul>
+
+<input type="submit" value="Guardar" />
+</form>
