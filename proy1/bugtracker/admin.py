@@ -11,10 +11,14 @@ admin.site.register(ComenRep)
 from bugtracker.models import Mensaje
 from django.contrib import admin
 
+admin.site.register(Mensaje)
+
 from bugtracker.models import Aplicacion
 from django.contrib import admin
+
+admin.site.register(Aplicacion)
 
 from bugtracker.models import Aplicacion_Usuario
 from django.contrib import admin
 
-admin.site.register(Mensaje)
+admin.site.register(Aplicacion_Usuario)
