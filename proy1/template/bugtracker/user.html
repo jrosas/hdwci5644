@@ -1,0 +1,18 @@
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/bugtracker/user/modificar/" method="post">
+{% csrf_token %}
+{% if lastest_bugtracker_list_user %}
+    <ul>
+    {% for error in lastest_bugtracker_list_user %}
+	<input type="radio" name="id" id="id{{ forloop.counter }}" value="{{ user.id }}" />
+        <label for="id{{ forloop.counter }}"> {{ user.id }}</label><br/>
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No existen errores.</p>
+{% endif %}
+
+<input type="submit" value="Modificar" />
+</form>

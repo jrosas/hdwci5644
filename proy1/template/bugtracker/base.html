@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{% block title%} {% endblock %}</title>
+<link href="{{ direccion }}estilo/estilo.css" rel="stylesheet" type="text/css" />
+    </head>
+<body>
+	<div class="cabecera">
+		<div class="pag1024">
+    		<h2>
+            	<a href="index.html">
+           		<img src="{{ direccion }}img/BugTrackerLogo.png" alt="BugTracker" /> </a>
+            </h2>
+    		<ul>
+            	<li><a href="nav.html"> Uno </a></li>
+            	<li><a href="nav.html"> La Empresa </a></li>
+            	<li><a href="nav.html"> Galeria </a></li>
+            	<li><a href="nav.html"> Noticias </a></li>
+            	<li><a href="nav.html"> Clasificados </a></li>
+            	<li><a href="nav.html"> Contacto </a></li>
+        	</ul>
+		</div>
+	</div>
+    <div id="body">
+		<div class="pag1024">
+{% block body %} {% endblock %}
+        </div>
+    </div>
+    <div id="footer">
+    	Pagina hecha por bla bla bla
+    </div>
+</body>
+</html>

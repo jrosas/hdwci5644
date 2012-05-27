@@ -25,6 +25,12 @@ PRIORIDAD_CHOICES = (
 def get_sentinel_user():
 	return User.objects.get_or_create(username='deleted')[0]
 
+class Aplicacion(models.Model):
+	id= models.AutoField(primary_key=True)
+	nombre=models.CharField(max_length=30)
+	version=models.CharField(max_length=30)
+
+
 class Error(models.Model):
 	
 	id= models.AutoField(primary_key=True)
@@ -35,7 +41,14 @@ class Error(models.Model):
 	informacion_duplicacion=models.TextField(max_length=4000)
         usuario_reporto=models.ForeignKey(User,related_name='+',on_delete=models.SET(get_sentinel_user))
 	usuario_encargado=models.ForeignKey(User,related_name='+', on_delete=models.SET(get_sentinel_user))
+	aplicacion=models.ForeignKey(Aplicacion)
 	fecha_modificacion=models.DateField(auto_now=True)
+
+
+class Aplicacion_Usuario(models.Model):
+	id= models.AutoField(primary_key=True)
+	aplicacion=models.ForeignKey(Aplicacion)
+	usuario=models.ForeignKey(User)
 
 class ComenRep(models.Model):
 	modo= models.CharField(max_length=1, choices=MODO_CHOICES)

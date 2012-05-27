@@ -3,12 +3,14 @@
 <form action="/bugtracker/error/modificar/guardar/{{ seleccionado.id }}/" method="post">
 {% csrf_token %}
 
+
     <ul>
-	<input type="radio" name="estado" id="1" value="S" /> Sin Confirmar <br/>
-	<input type="radio" name="estado" id="2" value="A" /> Asignado <br/> 
-	<input type="radio" name="estado" id="3" value="R" /> Resuelto <br/>
-	<input type="radio" name="estado" id="4" value="D" /> Duplicado <br/>
-	<input type="radio" name="estado" id="5" value="C" /> Cerrado  <br/>
+
+Nombre:   <input type="text" name="nombre" /><br />
+Apellido: <input type="text" name="apellido" />
+Usuario:   <input type="text" name="usuario" /><br />
+Correo: <input type="text" name="correo" />
+Clave:   <input type="text" name="clave" /><br />
     </ul>
 
 <input type="submit" value="Guardar" />
