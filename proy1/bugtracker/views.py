@@ -12,7 +12,7 @@ from bugtracker.models import Error,ComenRep,Mensaje, Aplicacion
 from django.contrib.auth.models import User, Group, Permission
 from django.http import HttpResponse
 from django.conf import settings
-from bugtracker.forms import FormularioRegistro, FormularioModificarUser, FormularioModificarError, FormularioRegistrarError, FormularioCrearAplicacion, FormularioUsuarioAd
+from bugtracker.forms import FormularioRegistro, FormularioModificarUser, FormularioModificarError, FormularioRegistrarError, FormularioCrearAplicacion, FormularioUsuarioAd, FormularioEnviarMensaje
 
 def inicio(request):
 	dir = "http://127.0.0.1:8000/template/bugtracker/"
@@ -218,7 +218,6 @@ def listar_error(request):
 	return render_to_response('bugtracker/listar_error.html', {'direccion':dir,'lastest_bugtracker_list_error':lastest_bugtracker_list_error}, context_instance=RequestContext(request))
 
 # ...
-
 def pre_modificar_error(request):
 	try:
 		seleccionado = Error.objects.get(pk=request.POST['id'])
@@ -227,6 +226,7 @@ def pre_modificar_error(request):
 		return Http404
 	else:
 		return redirect('modificar_error/%d/' % (seleccionado.id))
+
 
 
 def modificar_error(request,error_iden):
@@ -250,6 +250,37 @@ def modificar_error(request,error_iden):
 		else:
 	        	return render_to_response("bugtracker/modificar_error.html", {'direccion':dir,'msg': "Error al modificar usuario", 'f': f}, 
                                   context_instance=RequestContext(request))
+
+
+def enviar_mensaje(request):
+        dir = "http://127.0.0.1:8000/template/bugtracker/"
+
+	if request.method == "GET":
+        	f = FormularioEnviarMensaje()
+        	return render_to_response("bugtracker/enviar_mensaje.html", {'direccion':dir,'msg': "", 'f': f}, 
+                                  context_instance=RequestContext(request))
+
+    	elif request.method == "POST":
+        	f = FormularioEnviarMensaje(request.POST)
+       		if f.is_valid():
+               		emisor = f.cleaned_data['emisor']
+               		receptor = f.cleaned_data['receptor']
+               		asunto = f.cleaned_data['asunto']
+			contenido=f.cleaned_data['contenido']
+               		m = Mensaje(emisor=emisor,receptor=receptor,asunto=asunto,contenido=contenido)
+			m.save()
+                  	return render_to_response("bugtracker/index.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
+
+		else:
+	        	return render_to_response("bugtracker/enviar_mensaje.html", {'direccion':dir,'msg': "Error al modificar usuario", 'f': f}, 
+                                  context_instance=RequestContext(request))
+
+
+def eliminar_mensaje(request,mensaje_iden):
+        dir = "http://127.0.0.1:8000/template/bugtracker/"
+        m = Mensaje.objects.get(id_m=mensaje_iden)
+	m.delete()
+        return render_to_response("bugtracker/index.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
 
 
 

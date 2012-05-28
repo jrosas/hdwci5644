@@ -42,3 +42,7 @@ class FormularioUsuarioAd(forms.ModelForm):
 	class Meta:
 		model=User
 		fields=('username','first_name','last_name','email','password','active','superuser_status','staff_status','groups','last_login','user_permissions','date_joined')
+
+class FormularioEnviarMensaje(forms.ModelForm):
+	class Meta:
+		model=Mensaje

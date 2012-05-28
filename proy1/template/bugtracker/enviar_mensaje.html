@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %} Registrarse {% endblock %}
+
+{% block body %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/bugtracker/enviar_mensaje/" method="post">
+{% csrf_token %}
+
+{{ f.as_p }}
+
+<br/>
+
+<input type="submit" value="Enviar" />
+</form>
+{% endblock %}

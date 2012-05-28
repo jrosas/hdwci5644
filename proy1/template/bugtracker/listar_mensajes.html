@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} Registrarse {% endblock %}
+
+{% block body %}
+
+{% if mensaje_mensaje %}<p><strong>{{ mensaje_message }}</strong></p>{% endif %}
+
+<form action="/bugtracker/pre_eliminar_mensaje/" method="post">
+{% csrf_token %}
+{% if lastest_bugtracker_list_mensaje %}
+    <ul>
+    {% for mensaje in lastest_bugtracker_list_mensaje %}
+	<input type="radio" name="id" id="id{{ forloop.counter }}" value="{{ mensaje.id }}" />
+        <label for="id{{ forloop.counter }}"> De:{{ mensaje.emisor }}</label><br/>
+	<label for="id{{ forloop.counter }}"> Para:{{ mensaje.receptor }} </label><br/>
+        <label for="id{{ forloop.counter }}"> Asunto: {{ mensaje.asunto }}  </label><br/>
+	<br/>
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No existen errores.</p>
+{% endif %}
+
+<input type="submit" value="Eliminar"/>
+</form>
+{% endblock %}
