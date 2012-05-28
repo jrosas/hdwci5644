@@ -23,7 +23,7 @@ class FormularioModificarUser(forms.Form):
 class FormularioModificarError(forms.ModelForm):
 	class Meta:
 		model=Error
-		exclude=('prioridad','fecha_reporte','original','informacion_duplicacion','usuario_reporto','usuario_encargado','aplicacion')
+		exclude=('descripcion','prioridad','fecha_reporte','original','informacion_duplicacion','usuario_reporto','usuario_encargado','aplicacion')
 
 class FormularioRegistrarError(forms.ModelForm):
 	class Meta:

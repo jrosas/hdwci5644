@@ -163,28 +163,6 @@ def registrar_error(request):
 
 	
 
-def modificar_error(request,error_iden):
-        dir = "http://127.0.0.1:8000/template/bugtracker/"
-
-	if request.method == "GET":
-        	f = FormularioModificarError()
-        	return render_to_response("bugtracker/modificar_error.html", {'error_iden':error_iden,'direccion':dir,'msg': "", 'f': f}, 
-                                  context_instance=RequestContext(request))
-
-    	elif request.method == "POST":
-        	f = FormularioModificarError(request.POST)
-       		if f.is_valid():
-               		e = Error.objects.get(id=error_iden)
-			estado=f.cleaned_data['estado']
-			if estado!="":
-				e.estado=estado
-			e.save()
-                  	return render_to_response("bugtracker/index.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
-
-		else:
-	        	return render_to_response("bugtracker/modificar_error.html", {'direccion':dir,'msg': "Error al modificar usuario", 'f': f}, 
-                                  context_instance=RequestContext(request))
-
 
 def crear_aplicacion(request):
         dir = "http://127.0.0.1:8000/template/bugtracker/"
@@ -232,22 +210,48 @@ def mensajes(request):
 
 
 def listar_error(request):
+	dir = "http://127.0.0.1:8000/template/bugtracker/"
 	lastest_bugtracker_list_error=Error.objects.all().order_by('-id')[:10]
 	c = Context({
 	'lastest_bugtracker_list_error': lastest_bugtracker_list_error,
 	})
-	return render_to_response('bugtracker/error.html', {'lastest_bugtracker_list_error':lastest_bugtracker_list_error}, context_instance=RequestContext(request))
+	return render_to_response('bugtracker/listar_error.html', {'direccion':dir,'lastest_bugtracker_list_error':lastest_bugtracker_list_error}, context_instance=RequestContext(request))
 
 # ...
 
-def modificar(request):
+def pre_modificar_error(request):
 	try:
 		seleccionado = Error.objects.get(pk=request.POST['id'])
-	except User.DoesNotExist:
+	except Error.DoesNotExist:
         # Redisplay the poll voting form.
 		return Http404
 	else:
-		return render_to_response('bugtracker/modificar.html', {'seleccionado':seleccionado}, context_instance=RequestContext(request))
+		return redirect('modificar_error/%d/' % (seleccionado.id))
+
+
+def modificar_error(request,error_iden):
+        dir = "http://127.0.0.1:8000/template/bugtracker/"
+
+	if request.method == "GET":
+        	f = FormularioModificarError()
+        	return render_to_response("bugtracker/modificar_error.html", {'error_iden':error_iden,'direccion':dir,'msg': "", 'f': f}, 
+                                  context_instance=RequestContext(request))
+
+    	elif request.method == "POST":
+        	f = FormularioModificarError(request.POST)
+       		if f.is_valid():
+               		e = Error.objects.get(id=error_iden)
+			estado=f.cleaned_data['estado']
+			if estado!="":
+				e.estado=estado
+			e.save()
+                  	return render_to_response("bugtracker/index.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
+
+		else:
+	        	return render_to_response("bugtracker/modificar_error.html", {'direccion':dir,'msg': "Error al modificar usuario", 'f': f}, 
+                                  context_instance=RequestContext(request))
+
+
 
 #def guardar(request, user_id):
 

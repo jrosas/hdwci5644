@@ -1,6 +1,11 @@
+{% extends "base.html" %}
+{% block title %} Registrarse {% endblock %}
+
+{% block body %}
+
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="/bugtracker/error/modificar/" method="post">
+<form action="/bugtracker/pre_modificar_error/" method="post">
 {% csrf_token %}
 {% if lastest_bugtracker_list_error %}
     <ul>
@@ -39,3 +44,4 @@
 
 <input type="submit" value="Modificar" />
 </form>
+{% endblock %}
