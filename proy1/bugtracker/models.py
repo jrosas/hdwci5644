@@ -41,7 +41,7 @@ class Error(models.Model):
 	informacion_duplicacion=models.TextField(max_length=4000)
         usuario_reporto=models.ForeignKey(User,related_name='+',on_delete=models.SET(get_sentinel_user))
 	usuario_encargado=models.ForeignKey(User,related_name='+', on_delete=models.SET(get_sentinel_user))
-	aplicacion=models.ForeignKey(Aplicacion)
+	aplicacion=models.ForeignKey(Aplicacion, related_name='+')
 	fecha_modificacion=models.DateField(auto_now=True)
 
 

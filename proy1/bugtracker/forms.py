@@ -1,4 +1,7 @@
+from django.forms.models import BaseModelFormSet
+from bugtracker.models import ESTADO_CHOICES,Error,ComenRep,Mensaje
 from django import forms
+from django.forms import ModelForm
 
 class FormularioRegistro(forms.Form):
 	username = forms.CharField(max_length=20)
@@ -16,3 +19,12 @@ class FormularioModificarUser(forms.Form):
 	password = forms.CharField(max_length=20,required=False, widget=forms.PasswordInput)
 	confirm = forms.CharField(max_length=20, required=False, widget=forms.PasswordInput)
 	
+class FormularioModificarError(forms.ModelForm):
+	class Meta:
+		model=Error
+		exclude=('prioridad','fecha_reporte','original','informacion_duplicacion','usuario_reporto','usuario_encargado','aplicacion')
+
+class FormularioRegistrarError(forms.ModelForm):
+	class Meta:
+		model=Error
+		exclude=('fecha_reporte','usuario_reporto','usuario_encargado')

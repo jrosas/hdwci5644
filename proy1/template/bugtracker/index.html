@@ -1,1 +1,7 @@
-<label> HOLA <label/>
+{% extends "base.html" %}
+{% block title %} Registrarse {% endblock %}
+
+{% block body %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% endblock %}
