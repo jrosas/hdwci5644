@@ -1,3 +1,5 @@
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect
 from django.contrib.sessions.models import Session
 from django.contrib.auth import authenticate, login
@@ -6,11 +8,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.template import Context, loader
-from bugtracker.models import Error,ComenRep,Mensaje
-from django.contrib.auth.models import User
+from bugtracker.models import Error,ComenRep,Mensaje, Aplicacion
+from django.contrib.auth.models import User, Group, Permission
 from django.http import HttpResponse
 from django.conf import settings
-from bugtracker.forms import FormularioRegistro, FormularioModificarUser, FormularioModificarError, FormularioRegistrarError
+from bugtracker.forms import FormularioRegistro, FormularioModificarUser, FormularioModificarError, FormularioRegistrarError, FormularioCrearAplicacion, FormularioUsuarioAd
 
 def inicio(request):
 	dir = "http://127.0.0.1:8000/template/bugtracker/"
@@ -55,13 +57,8 @@ def logins(request):
 	# Return an 'invalid login' error message.
 
 
-def logout(request):
-    try:
-        del request.session['uid']
-    except KeyError:
-        pass
-    return HttpResponse("Ha sido desconectado. <a href=\"/\">Haga clic aca para continuar</a>")
-
+def logouts(request):
+    logout(request)
 
 
 def registrarse(request):
@@ -85,7 +82,8 @@ def registrarse(request):
                     			return render_to_response("bugtracker/registrarse.html",{'direccion':dir,'msg': "Contrase&ntilde;as no coinciden!",'f': f}, 
                                               context_instance=RequestContext(request))
                 		else:
-                    			u = User(username=f.cleaned_data['username'], email=f.cleaned_data['correo'],password=f.cleaned_data['password'])
+                    			username=f.cleaned_data['username']
+					u = User(username=username, email=f.cleaned_data['correo'],password=f.cleaned_data['password'])
                         		nombre = f.cleaned_data['nombre']
                         		apellido = f.cleaned_data['apellido']
                         		u.first_name=nombre
@@ -93,7 +91,6 @@ def registrarse(request):
                         		u.is_staff=False
                         		u.is_active=True
                         		u.is_superuser=False
-
                     			u.save()
                     			return render_to_response("bugtracker/login.html", {'direccion':dir,'msg': "Usuario ya creado!!"}, 
                                               context_instance=RequestContext(request))
@@ -189,6 +186,45 @@ def modificar_error(request,error_iden):
                                   context_instance=RequestContext(request))
 
 
+def crear_aplicacion(request):
+        dir = "http://127.0.0.1:8000/template/bugtracker/"
+
+	if request.method == "GET":
+        	f = FormularioCrearAplicacion()
+        	return render_to_response("bugtracker/registrar_error.html", {'direccion':dir,'msg': "", 'f': f}, 
+                                  context_instance=RequestContext(request))
+    	
+	elif request.method == "POST":
+       		f=FormularioCrearAplicacion(request.POST)
+		if f.is_valid():
+			nombre=f.cleaned_data['nombre']
+			version=f.cleaned_data['version']
+               		a = Aplicacion(nombre=nombre,version=version)
+			a.save()
+                  	return render_to_response("bugtracker/index.html", {'direccion':dir,'msg': "Aplicacion ya creado!!"},context_instance=RequestContext(request))
+
+		else:
+	        	return render_to_response("bugtracker/crear_aplicacion.html", {'direccion':dir,'msg': "Error al modificar usuario", 'f': f}, 
+                                  context_instance=RequestContext(request))
+
+
+def modificar_admin(request):
+        dir = "http://127.0.0.1:8000/template/bugtracker/"
+
+	if request.method == "GET":
+        	f =FormularioUsuarioAd()
+        	return render_to_response("bugtracker/registrar_error.html", {'direccion':dir,'msg': "", 'f': f}, 
+                                  context_instance=RequestContext(request))
+    	
+	elif request.method == "POST":
+        	f = FormularioUsuarioAd(request.POST)
+		
+		if f.is_valid():
+                  	return render_to_response("bugtracker/index.html", {'direccion':dir,'msg': "Aplicacion ya creado!!"},context_instance=RequestContext(request))
+
+		else:
+	        	return render_to_response("bugtracker/modificar_admin.html", {'direccion':dir,'msg': "Error al modificar usuario", 'f': f}, 
+                                  context_instance=RequestContext(request))
 
 
 def mensajes(request):
