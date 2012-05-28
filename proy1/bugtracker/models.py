@@ -38,6 +38,7 @@ class Error(models.Model):
 	prioridad=models.CharField(max_length=1, choices=PRIORIDAD_CHOICES)
 	fecha_reporte=models.DateField()
 	original=models.BooleanField()
+	descripcion=models.TextField(max_length=4000)
 	informacion_duplicacion=models.TextField(max_length=4000)
         usuario_reporto=models.ForeignKey(User,related_name='+',on_delete=models.SET(get_sentinel_user))
 	usuario_encargado=models.ForeignKey(User,related_name='+', on_delete=models.SET(get_sentinel_user))

@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     # url(r'^bts/', include('bts.foo.urls')),
 
     url(r'^bugtracker/$', 'bugtracker.views.inicio'),
-#    url(r'^bugtracker/error/modificar/$','bugtracker.views.modificar'),
+    url(r'^bugtracker/error/$','bugtracker.views.error'),
     url(r'^bugtracker/pre_login/$', 'bugtracker.views.pre_login'),
     url(r'^bugtracker/login/$', 'bugtracker.views.logins'),
     url(r'^bugtracker/login/iniciada/$', 'bugtracker.views.inicio'),

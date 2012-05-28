@@ -231,7 +231,7 @@ def mensajes(request):
 	return HttpResponse("Estas en el indice")
 
 
-def error(request):
+def listar_error(request):
 	lastest_bugtracker_list_error=Error.objects.all().order_by('-id')[:10]
 	c = Context({
 	'lastest_bugtracker_list_error': lastest_bugtracker_list_error,
