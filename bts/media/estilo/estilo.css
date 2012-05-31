@@ -1,0 +1,61 @@
+@charset "utf-8";
+* {
+	margin: 0px;
+	padding: 0px;
+}
+.cabecera {
+	background-image: url(fondoH.png);
+	background-repeat: repeat;
+	height: 120px;
+	width: auto;
+}
+.pag1024 {
+	width: 980px;
+	margin: 0 auto 0 auto;
+	
+}
+.cabecera .pag1024 ul {
+	float: right;
+	position: absolute;
+	top: 0px;
+	left: 680px;
+}
+.cabecera .pag1024 ul li {
+	float: left;
+	display: block;
+	width: 100px;
+	list-style-type: none;
+	text-align: center;
+	background-color:#FFF;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	vertical-align: middle;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.cabecera .pag1024 ul li:hover {
+	background-image:url(fondoli.png);
+	background-color:transparent;
+}
+	
+li a {
+	text-decoration: none;
+	color: #111;
+	font-family: Verdana, Geneva, sans-serif;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+}
+#footer {
+	width: 490px;
+	background-image:url(fondoF.png);
+	margin: 0px auto 0px auto;
+	padding: 15px;
+	color:#FFFFFF;
+	text-align:center;
+	-webkit-border-radius: 10px 10px;  /* Safari  */
+	-moz-border-radius: 10px 10px;     /* Firefox */	
+}

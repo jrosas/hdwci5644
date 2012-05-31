@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Errores {% endblock %}
+
+{% block body %}
+
+<h1>Error:</h1>
+<h1>{{ error.nombre }}</h1>
+<hr />
+<a href="/errores/editar/{{ error.id }}">Editar</a> | <a href="discs/{{ disco.id }}/delete">Borrar</a>
+<hr />
+
+<p><span style="font-weight: bold;">Nombre: </span> {{ error.nombre }} </p>
+<p><span style="font-weight: bold;">Estado: </span> {{ error.get_estado_display }} </p>
+<p><span style="font-weight: bold;">Prioridad: </span> {{ error.get_prioridad_display }} </p>
+<p><span style="font-weight: bold;">Fecha reporte: </span> {{ error.fecha_reporte }} </p>
+<p><span style="font-weight: bold;">Usuario Reporto: </span> {{ error.usuario_reporto }} </p>
+<p><span style="font-weight: bold;">Usuario Encargado: </span> {{ error.usuario_encargado }} </p>
+<p><span style="font-weight: bold;">Descripci&oacute;n: </span> {{ error.descripcion }} </p>
+<p><span style="font-weight: bold;">Aplicacion:</span> {{ error.aplicacion }} </p>
+<p><span style="font-weight: bold;">Fecha Modificacion: </span> {{ error.fecha_modificacion }} </p>
+
+
+{% endblock %}

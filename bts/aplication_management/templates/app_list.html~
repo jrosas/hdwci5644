@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %} Aplicaciones Disponibles {% endblock %}
+
+{% block body %}
+   {% for app in list_aplication %}  <br>  
+     <h2>{{ app.aplication_object.nombre }}</h2>  <br>  
+   {% endfor %}
+{% endblock %}

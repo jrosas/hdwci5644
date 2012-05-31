@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %} Registrarse {% endblock %}
+
+{% block body %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/bugtracker/pre_modificar_error/" method="post">
+{% csrf_token %}
+{% if lastest_bugtracker_list_error %}
+    <ul>
+    {% for error in lastest_bugtracker_list_error %}
+	<input type="radio" name="id" id="id{{ forloop.counter }}" value="{{ error.id }}" />
+        <label for="id{{ forloop.counter }}"> {{ error.descripcion }}</label><br/>
+	{%if error.estado == 'S'%}
+	<label for="id{{ forloop.counter }}"> Sin Confirmar </label><br/>
+	{% endif %}
+
+
+	{%if error.estado == 'A'%}
+        <label for="id{{ forloop.counter }}"> Asignado </label><br/>
+	{% endif %}
+
+	{%if error.estado == 'R'%}
+        <label for="id{{ forloop.counter }}"> Resuelto </label><br/>
+	{% endif %}
+
+
+	{%if error.estado == 'D'%}
+        <label for="id{{ forloop.counter }}"> Duplicado </label><br/>
+	{% endif %}
+	
+	{%if error.estado == 'C'%}
+        <label for="id{{ forloop.counter }}"> Cerrado </label><br/>
+	{% endif %}
+	
+	<br/>
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No existen errores.</p>
+{% endif %}
+
+<input type="submit" value="Modificar" />
+</form>
+{% endblock %}

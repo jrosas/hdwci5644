@@ -1,0 +1,4 @@
+from django.shortcuts import render_to_response
+
+def index ():
+    return reder_to_response('index.html')

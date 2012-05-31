@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %} Aplicaciones Disponibles {% endblock %}
+
+{% block body %}
+<h1>Mensaje</h1>
+<hr />
+<a href="/new">A&ntilde;adir nuevo</a>
+<hr />
+
+{% if object_list %}
+    <table>
+        <tr>
+            <th>Emisor</th>
+            <th>Receptor</th>
+            <th>Asunto</th>
+        </tr>
+    {% for msg in object_list %}
+        <tr>
+            <td>{{ msg.emisor }}</td>
+            <td>{{ msg.receptor }}</td>
+            <td>{{ msg.asunto }}</td>
+            
+
+        </tr>    
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No hay Mensajes para listar </p>
+{% endif %}
+{% endblock %}

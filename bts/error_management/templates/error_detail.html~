@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %} Errores {% endblock %}
+
+{% block body %}
+
+<h1>Errores</h1>
+<hr />
+<a href="/new">A&ntilde;adir nuevo</a>
+<hr />
+
+{% if object_list %}
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+            <th>Fecha Reporte</th>
+	    <th>Usuario Encargado</th>
+            <th></th>
+        </tr>
+    {% for error in object_list %}
+        <tr>
+            <td>{{ error.nombre }}</td>
+            <td>{{ error.get_estado_display }}</td>
+            <td>{{ error.get_prioridad_display }}</td>
+            <td>{{ error.fecha_reporte }}</td>
+            <td>{{ error.usuario_encargado }}</td>
+            <td><a href="error/{{error.id}}">Detalle</a></td>
+        </tr>    
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No hay errores para listar </p>
+{% endif %}
+
+{% endblock %}

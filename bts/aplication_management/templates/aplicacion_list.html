@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %} Aplicaciones Disponibles {% endblock %}
+
+{% block body %}
+<h1>Aplicaciones</h1>
+<hr />
+<a href="/new">A&ntilde;adir nuevo</a>
+<hr />
+
+{% if object_list %}
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Version</th>
+            <th>Usuario</th>
+        </tr>
+    {% for app in object_list %}
+        <tr>
+            <td>{{ app.nombre }}</td>
+            <td>{{ app.version }}</td>
+            {% for user in app.usuario.all %}            
+            <td>{{ user.username }}</td>
+            {% endfor %}
+
+        </tr>    
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No hay aplicaciones para listar </p>
+{% endif %}
+{% endblock %}
