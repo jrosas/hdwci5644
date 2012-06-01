@@ -4,17 +4,21 @@
 {% block body %}
 
 {% if mensaje_mensaje %}<p><strong>{{ mensaje_message }}</strong></p>{% endif %}
-
-<form action="/mensajes/delete_entrada/{{ mensaje.id_m }}" method="post">
+<a href="/mensajes/entrada/"> Bandeja de Entrada </a> <br/>
+<a href="/mensajes/salida/"> Bandeja de Salida </a> <br/>
+<a href="/mensajes/send/"> Crear Mensaje </a> <br/>
+<br/>
+<br/>
+<form action="/mensajes/delete_entrada/" method="post">
 {% csrf_token %}
 {% if bandeja %}
     <ul>
     {% for mensaje in bandeja %}
-	<input type="radio" name="id" id="id{{ forloop.counter }}" value="{{ mensaje.id }}" />
+	<input type="radio" name="id" id="id{{ forloop.counter }}" value="{{ mensaje.id_m }}" />
         <label for="id{{ forloop.counter }}"> De:{{ mensaje.emisor }}</label><br/>
 	<label for="id{{ forloop.counter }}"> Para:{{ mensaje.receptor }} </label><br/>
         <label for="id{{ forloop.counter }}"> Asunto: {{ mensaje.asunto }}  </label><br/>
-	<br/>
+ 	<br/>
 
     {% endfor %}
     </ul>
