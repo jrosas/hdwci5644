@@ -84,8 +84,11 @@ def registrarse(request):
 
 
 
-def modificar_user(request):
+def modificar_user_per(request):
         dir = "http://127.0.0.1:8000/template/bugtracker/"
+	session=Session.objects.get(session_key=request.session.session_key)
+        uid=session.get_decoded().get('_auth_user_id')
+    	u=User.objects.get(pk=uid)
 
         if request.method == "GET":
                 f = FormularioModificarUser()
@@ -95,8 +98,6 @@ def modificar_user(request):
         elif request.method == "POST":
                 f = FormularioModificarUser(request.POST)
                 if f.is_valid():
-                        uid=request.session.get('uid')
-                        u=User.objects.get(id=uid)
                         nombre=f.cleaned_data['nombre']
                         apellido=f.cleaned_data['apellido']
                         password=f.cleaned_data['password']
@@ -115,8 +116,51 @@ def modificar_user(request):
                         return render_to_response("index.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
 
                 else:
-			 return render_to_response("modificar_user.html", {'direccion':dir,'msg': "Error al modificar usuario", 'f': f},
+			 return render_to_response("modificar_user_per.html", {'direccion':dir,'msg': "Error al modificar usuario", 'f': f},
                                   context_instance=RequestContext(request))
+
+
+def modificar_user(request,user_iden):
+        dir = "http://127.0.0.1:8000/template/bugtracker/"
+    	u=User.objects.get(id=user_iden)
+
+        if request.method == "GET":
+                f = FormularioModificarUser()
+                return render_to_response("modificar_user.html", {'direccion':dir,'msg': "", 'f': f},
+                                  context_instance=RequestContext(request))
+
+        elif request.method == "POST":
+                f = FormularioModificarUser(request.POST)
+                if f.is_valid():
+                        nombre=f.cleaned_data['nombre']
+                        apellido=f.cleaned_data['apellido']
+                        password=f.cleaned_data['password']
+                        confirm=f.cleaned_data['confirm']
+                        correo=f.cleaned_data['correo']
+                        if nombre!="":
+                                u.first_name=nombre
+                        if apellido!="":
+                                u.last_name=apellido
+                        if correo!="":
+                                u.email=correo
+                        if password==confirm and password!="":
+                                u.password=password
+
+                        u.save()
+                        return render_to_response("index.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
+
+                else:
+			 return render_to_response("modificar_user.html", {'direccion':dir,'user':u,'msg': "Error al modificar usuario", 'f': f},
+                                  context_instance=RequestContext(request))
+
+
+def detail_per(request):
+	session=Session.objects.get(session_key=request.session.session_key)
+        uid=session.get_decoded().get('_auth_user_id')
+    	u=User.objects.get(pk=uid)
+	return render_to_response("user_detail_per.html", {'direccion':dir,'msg': "Error al modificar usuario", 'user': u},
+                                  context_instance=RequestContext(request))
+
 
 def modificar_admin(request):
         dir = "http://127.0.0.1:8000/template/bugtracker/"

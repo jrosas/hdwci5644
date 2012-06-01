@@ -4,7 +4,7 @@
 {% block body %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="/usuarios/modificar_user/{{user.id}}" method="post">
+<form action="/usuarios/modificar_user_per/" method="post">
 {% csrf_token %}
 
 {{ f.as_p }}

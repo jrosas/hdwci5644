@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load comments %}
+{% block title %} Errores {% endblock %}
+
+{% block body %}
+
+<h1>Usuario:</h1>
+<h1>{{ user.username }}</h1>
+<hr />
+<a href="/usuarios/modificar_user_per">Editar</a> | <a href="discs/{{ disco.id }}/delete">Borrar</a>
+<hr />
+
+<p><span style="font-weight: bold;">Nombre: </span> {{ user.first_name }} </p>
+<p><span style="font-weight: bold;">Estado: </span> {{ user.last_name }} </p>
+<p><span style="font-weight: bold;">Prioridad: </span> {{ user.email }} </p>
+<p><span style="font-weight: bold;">Fecha reporte: </span> {{ user.last_login }} </p>
+<br/>
+<br/>
+
+{% endblock %}
