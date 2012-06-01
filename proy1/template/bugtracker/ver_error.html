@@ -3,14 +3,4 @@
 
 {% block body %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="/errores/add/" method="post">
-{% csrf_token %}
-
-{{ f.as_p }}
-
-<br/>
-
-<input type="submit" value="Publicar" />
-</form>
 {% endblock %}

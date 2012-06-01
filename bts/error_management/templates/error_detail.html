@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load comments %}
 {% block title %} Errores {% endblock %}
 
 {% block body %}
@@ -18,6 +19,8 @@
 <p><span style="font-weight: bold;">Descripci&oacute;n: </span> {{ error.descripcion }} </p>
 <p><span style="font-weight: bold;">Aplicacion:</span> {{ error.aplicacion }} </p>
 <p><span style="font-weight: bold;">Fecha Modificacion: </span> {{ error.fecha_modificacion }} </p>
-
+<br/>
+<br/>
+{% render_comment_list for error%}
 
 {% endblock %}

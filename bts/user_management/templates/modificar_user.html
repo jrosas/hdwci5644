@@ -4,13 +4,13 @@
 {% block body %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="/errores/add/" method="post">
+<form action="/usuarios/modificar_user/" method="post">
 {% csrf_token %}
 
 {{ f.as_p }}
 
 <br/>
 
-<input type="submit" value="Publicar" />
+<input type="submit" value="Modificar" />
 </form>
 {% endblock %}

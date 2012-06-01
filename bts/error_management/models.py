@@ -27,7 +27,7 @@ class Error(models.Model):
         id= models.AutoField(primary_key=True)
         estado= models.CharField(max_length=1, choices=ESTADO_CHOICES)
         prioridad=models.CharField(max_length=1, choices=PRIORIDAD_CHOICES)
-        fecha_reporte=models.DateField()
+        fecha_reporte=models.DateField(auto_now_add=True)
         original=models.BooleanField()
 	nombre=models.CharField(max_length=30)
         descripcion=models.TextField(max_length=4000)

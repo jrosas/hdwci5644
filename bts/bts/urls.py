@@ -28,12 +28,23 @@ urlpatterns = patterns('',
                                         template_name='mensaje_list.html')),
     url(r'^usuarios/$', ListView.as_view(model=User,
                                     template_name='user_list.html')),
+    url(r'^usuarios/registrarse$', 'user_management.views.registrarse'),
+    url(r'^usuarios/iniciada/$', 'views.index'),
+    url(r'^usuarios/pre_login$', 'user_management.views.pre_login'),
+    url(r'^usuarios/login$', 'user_management.views.logins'),
+    url(r'^usuarios/logout$', 'user_management.views.logouts'),
+    url(r'^usuarios/modificar_user$', 'user_management.views.modificar_user'),
+    url(r'^usuarios/modificar_admin$', 'user_management.views.modificar_admin'),
+
     url(r'^errores/error/(?P<pk>\d+)$', DetailView.as_view(model=Error,
                                     template_name='error_detail.html')),
     url(r'^errores/editar/(?P<error_iden>\d+)$', 'error_management.views.modificar_error'),
+    url(r'^errores/comentar/(?P<error_iden>\d+)$', 'error_management.views.mostrar_comentarios'),
+    url(r'^errores/add/$', 'error_management.views.registrar_error'),
     url(r'^$','views.index'),
 
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DOC_ROOT}),   
     (r'^comments/', include('django.contrib.comments.urls')),
+
 
 )

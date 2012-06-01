@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from django.views.generic import DetailView
+from bugtracker.models import Error
 from django.conf import settings
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -26,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^bugtracker/crear_aplicacion/$', 'bugtracker.views.crear_aplicacion'),
     url(r'^bugtracker/mostrar_comentarios/(?P<error_iden>\d+)/$', 'bugtracker.views.mostrar_comentarios'),
     url(r'^bugtracker/listar_com_error/(?P<error_iden>\d+)/$', 'bugtracker.views.listar_com_error'),
+#    url(r'^bugtracker/ver_error/(?P<pk>\d+)/$', DetailView.as_view(model=Error,template_name='bugtracker/ver_error.html')),
     (r'^comments', include('django.contrib.comments.urls')),
 #    url(r'^bugtracker/user/modificar/guardar/(?P<error_id>\d+)/$','bugtracker.views.guardar'),
 #    url(r'^bugtracker/(?P<bugtracker_id>\d+)/$', 'bugtracker.views.login'),
