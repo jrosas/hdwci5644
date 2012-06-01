@@ -11,7 +11,7 @@ from django.template import Context, loader
 from django.contrib.auth.models import User, Group, Permission
 from django.http import HttpResponse
 from django.conf import settings
-from forms import FormularioRegistro, FormularioModificarUser
+from forms import FormularioRegistro, FormularioModificarUser,FormularioUsuarioAd
 
 
 

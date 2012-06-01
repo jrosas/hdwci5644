@@ -22,10 +22,17 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^aplicaciones/$',  ListView.as_view(model=Aplicacion,
                                         template_name='aplicacion_list.html')),
+    url(r'^aplicaciones/add/$', 'aplication_management.views.crear_aplicacion'),
+
+
     url(r'^errores/$', ListView.as_view(model=Error,
                                         template_name='error_list.html')),
     url(r'^mensajes/$', ListView.as_view(model=Mensaje,
                                         template_name='mensaje_list.html')),
+    url(r'^mensajes/delete/$', 'message_management.views.eliminar_mensaje'),
+    url(r'^mensajes/send/$', 'message_management.views.enviar_mensaje'),
+
+
     url(r'^usuarios/$', ListView.as_view(model=User,
                                     template_name='user_list.html')),
     url(r'^usuarios/registrarse$', 'user_management.views.registrarse'),
