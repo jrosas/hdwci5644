@@ -5,12 +5,18 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="/usuarios/registrarse/" method="post">
-{% csrf_token %}
+  {% csrf_token %}
+  <table>
+    {{ f.as_table }}
+    <tr></tr>
+    <tr>
+      <td> </td>
+      <td>
+        <input type="submit" value="Registrar" />
+      </td>
+    </tr>
+  </table>
 
-{{ f.as_p }}
 
-<br/>
-
-<input type="submit" value="Registrar" />
 </form>
 {% endblock %}
