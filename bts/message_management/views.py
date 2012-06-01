@@ -39,10 +39,36 @@ def enviar_mensaje(request):
                                   context_instance=RequestContext(request))
 
 
-def eliminar_mensaje(request,mensaje_iden):
+def eliminar_entrada(request,mensaje_iden):
         dir = "http://127.0.0.1:8000/template/bugtracker/"
         m = Mensaje.objects.get(id_m=mensaje_iden)
         m.delete()
-        return render_to_response("index.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
+        return render_to_response("listar_mensajes_entrada.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
+
+def eliminar_salida(request,mensaje_iden):
+        dir = "http://127.0.0.1:8000/template/bugtracker/"
+        m = Mensaje.objects.get(id_m=mensaje_iden)
+        m.delete()
+        return render_to_response("listar_mensajes_salida.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
+
+
+def bandeja_entrada(request):
+        dir = "http://127.0.0.1:8000/template/bugtracker/"
+        session=Session.objects.get(session_key=request.session.session_key)
+        uid=session.get_decoded().get('_auth_user_id')
+        u=User.objects.get(pk=uid)
+
+	m = Mensaje.objects.filter(receptor=u)
+        return render_to_response("listar_mensajes_entrada.html", {'direccion':dir,'bandeja':m,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
+
+
+def bandeja_salida(request):
+        dir = "http://127.0.0.1:8000/template/bugtracker/"
+        session=Session.objects.get(session_key=request.session.session_key)
+        uid=session.get_decoded().get('_auth_user_id')
+        u=User.objects.get(pk=uid)
+
+	m = Mensaje.objects.filter(emisor=u)
+        return render_to_response("listar_mensajes_salida.html", {'direccion':dir,'bandeja':m,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
 
 

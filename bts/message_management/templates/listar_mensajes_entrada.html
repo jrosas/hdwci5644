@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} Registrarse {% endblock %}
+
+{% block body %}
+
+{% if mensaje_mensaje %}<p><strong>{{ mensaje_message }}</strong></p>{% endif %}
+
+<form action="/mensajes/delete_entrada/{{ mensaje.id_m }}" method="post">
+{% csrf_token %}
+{% if bandeja %}
+    <ul>
+    {% for mensaje in bandeja %}
+	<input type="radio" name="id" id="id{{ forloop.counter }}" value="{{ mensaje.id }}" />
+        <label for="id{{ forloop.counter }}"> De:{{ mensaje.emisor }}</label><br/>
+	<label for="id{{ forloop.counter }}"> Para:{{ mensaje.receptor }} </label><br/>
+        <label for="id{{ forloop.counter }}"> Asunto: {{ mensaje.asunto }}  </label><br/>
+	<br/>
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No existen mensajes.</p>
+{% endif %}
+
+<input type="submit" value="Eliminar"/>
+</form>
+{% endblock %}

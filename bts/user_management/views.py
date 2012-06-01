@@ -136,3 +136,9 @@ def modificar_admin(request):
                         return render_to_response("bugtracker/modificar_admin.html", {'direccion':dir,'msg': "Error al modificar usuario", 'f': f},
                                   context_instance=RequestContext(request))
 
+
+def eliminar_usuario(request,user_iden):
+        u=User.objects.get(pk=user_iden)
+        u.delete()
+        return render_to_response("listar_user.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))
+

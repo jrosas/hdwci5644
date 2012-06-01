@@ -79,3 +79,9 @@ def modificar_error(request,error_iden):
 def mostrar_comentarios(request,error_iden):
 	e = Error.objects.get(id=error_iden)
 	return render_to_response("comentar_error.html", {'direccion':dir,'msg': "Usuario ya creado!!",'error':e},context_instance=RequestContext(request))
+
+
+def eliminar_error(request,error_iden):
+        e=Error.objects.get(id=error_iden)
+        e.delete()
+        return render_to_response("listar_error.html", {'direccion':dir,'msg': "Usuario ya creado!!"},context_instance=RequestContext(request))

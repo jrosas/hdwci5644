@@ -31,6 +31,11 @@ urlpatterns = patterns('',
                                         template_name='mensaje_list.html')),
     url(r'^mensajes/delete/$', 'message_management.views.eliminar_mensaje'),
     url(r'^mensajes/send/$', 'message_management.views.enviar_mensaje'),
+    url(r'^mensajes/entrada/$', 'message_management.views.bandeja_entrada'),
+    url(r'^mensajes/salida/$', 'message_management.views.bandeja_salida'),
+    url(r'^errores/comentar/(?P<error_iden>\d+)$', 'error_management.views.mostrar_comentarios'),
+    url(r'^mensajes/delete_entrada/(?P<mensaje_iden>\d+)$', 'message_management.views.eliminar_entrada'),
+    url(r'^mensajes/delete_salida/(?P<mensaje_iden>\d+)$', 'message_management.views.eliminar_salida'),
 
 
     url(r'^usuarios/$', ListView.as_view(model=User,
