@@ -61,7 +61,7 @@ MEDIA_URL = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = ''
-STATIC_DOC_ROOT= '/home/jrosas/projects/hdwci5644/bts/media/'
+STATIC_DOC_ROOT= '/root/hdwci5644/bts/media/'
 #DIREC='http://127.0.0.1:8000/media/'
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -111,11 +111,11 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/jrosas/projects/hdwci5644/bts/templates',
-    '/home/jrosas/projects/hdwci5644/bts/aplication_management/templates',
-    '/home/jrosas/projects/hdwci5644/bts/error_management/templates',
-    '/home/jrosas/projects/hdwci5644/bts/message_management/templates',
-    '/home/jrosas/projects/hdwci5644/bts/user_management/templates',
+    '/root/hdwci5644/bts/templates',
+    '/root/hdwci5644/bts/aplication_management/templates',
+    '/root/hdwci5644/bts/error_management/templates',
+    '/root/hdwci5644/bts/message_management/templates',
+    '/root/hdwci5644/bts/user_management/templates',
     
 )
 
@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'message_management',
     'django.contrib.comments',
 )
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

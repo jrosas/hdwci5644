@@ -36,3 +36,4 @@ class Error(models.Model):
         usuario_encargado=models.ForeignKey(User,related_name='+', on_delete=models.SET(get_sentinel_user))
         aplicacion=models.ForeignKey(Aplicacion)
         fecha_modificacion=models.DateField(auto_now=True)
+

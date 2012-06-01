@@ -7,7 +7,7 @@
 <h1>Error:</h1>
 <h1>{{ error.nombre }}</h1>
 <hr />
-<a href="/errores/editar/{{ error.id }}">Editar</a> | <a href="discs/{{ disco.id }}/delete">Borrar</a>
+<a href="/errores/editar/{{ error.id }}">Editar</a> | <a href="discs/{{ disco.id }}/delete">Borrar</a> | <a href="/errores/comentar/{{error.id}}">Comentar<a/>
 <hr />
 
 <p><span style="font-weight: bold;">Nombre: </span> {{ error.nombre }} </p>
@@ -21,6 +21,15 @@
 <p><span style="font-weight: bold;">Fecha Modificacion: </span> {{ error.fecha_modificacion }} </p>
 <br/>
 <br/>
-{% render_comment_list for error%}
 
+{% get_comment_list for error as comment_list %}
+{% for comment in comment_list %}
+        <label for="id{{ forloop.counter }}"> Publicado por:{{ comment.user_name }}</label><br/>
+        <label for="id{{ forloop.counter }}"> Fecha de publicacion:{{ comment.submit_date }} </label><br/>
+        <label for="id{{ forloop.counter }}"> {{ comment.comment }}  </label>
+	<br/>
+        <br/>
+
+    
+{% endfor %}
 {% endblock %}

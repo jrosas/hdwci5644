@@ -40,7 +40,7 @@ urlpatterns = patterns('',
 
     url(r'^usuarios/$', ListView.as_view(model=User,
                                     template_name='user_list.html')),
-    url(r'^usuarios/registrarse$', 'user_management.views.registrarse'),
+    url(r'^usuarios/registrarse/$', 'user_management.views.registrarse'),
     url(r'^usuarios/iniciada/$', 'views.index'),
    # url(r'^usuarios/pre_login$', 'user_management.views.pre_login'),
     url(r'^login$', 'user_management.views.log_in'),
