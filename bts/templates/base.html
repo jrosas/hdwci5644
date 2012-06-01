@@ -1,36 +1,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{% block title%} {% endblock %}</title>
-<link href="/media/estilo/estilo.css" rel="stylesheet" type="text/css" />
-    </head>
-<body>
-	<div class="cabecera">
-		<div class="pag1024">
-    		
-            	<a href="http://127.0.0.1:8000/">
-           		<img src="/media/img/BugTrackerLogo.png" alt="BugTracker" /> </a>
-            
-    		<ul>
-            	<li><a href="http://127.0.0.1:8000/errores/"> Errores </a></li>
-            	<li><a href="http://127.0.0.1:8000/modificar_user/"> Aplicaciones </a></li>
-            	<li><a href="http://127.0.0.1:8000/modificar_user/"> Perfil </a></li>
-            	<li><a href="http://127.0.0.1:8000/modificar_user/"> Mensajes </a></li>
-            	<li><a href="nav.html"> Comentarios </a></li>
-            	<li><a href="nav.html"> Contacto </a></li>
-        	</ul>
-		</div>
-	</div>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title%} {% endblock %}</title>
+    <link href="/media/estilo/estilo.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="cabecera">
+      <div class="pag1024">
+        <a href="http://127.0.0.1:8000/">
+          <img src="/media/img/BugTrackerLogo.png" alt="BugTracker" /> </a>
+
+        <ul>
+	  {% if not user.is_authenticated %}
+	  <li><a href="/login"> Login </a></li>
+	 
+          <li><a href="/usuarios/registrarse"> Registrate </a></li>
+
+	  {% else %}
+	
+	  <li>Hi, {{ user.username }}</li>
+	  {% if user.groups.all.0.name == 'Usuarios' %}
+	  <li>Usuario</li>
+	  {% else %}
+	     {% if user.groups.all.0.name == 'Gateekeper' %}
+	        <li>Gateekeper</li>
+	     {% else %}
+	         <li>Admin</li>
+	     {% endif %}
+	  {% endif %}
+	  {% endif %}
+        </ul>
+      </div>
+    </div>
     <div id="body">
-		<div class="pag1024">
-{% block body %} {% endblock %}
-        </div>
+      <div class="pag1024">
+	{% block body %} {% endblock %}
+      </div>
     </div>
-<br />
-<br />
+    <br />
+    <br />
     <div id="footer">
-    	Realizado por Juan Rosas 07-41502 Nellybett Irahola 07-11111
+      Realizado por Juan Rosas 07-41502 Nellybett Irahola 07-11111
     </div>
-</body>
+  </body>
 </html>

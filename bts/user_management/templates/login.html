@@ -3,16 +3,28 @@
 
 {% block body %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<h3> {{state}} </h3>
+</br> 
+<form action="/login" method="post">
+  {% csrf_token %}
+  <table>
+    <tr>
+      <th> <label> Usuario: </label> </th>
+      <td> <input type="text" name="username" /> </td>
 
-<form action="/usuarios/login" method="post">
-{% csrf_token %}
+    </tr>
+    <tr></tr>
+    <tr>
+      <th> <label> Clave:   </label> </th>
+      <td> <input type="password" name="password" /> </td>
+      
+    </tr>
+    <tr></tr>
+    <tr>
+      <td> </td>
+      <td> <input type="submit" value="Acceder" /> </td>
+    </tr>
+  </table>
 
-
-    <ul>
-<label> Usuario: </label>  <input type="text" name="username" /><br />
-<label> Clave:   </label>  <input type="text" name="password" />
-    </ul>
-
-<input type="submit" value="Acceder" />
 </form>
 {% endblock %}
